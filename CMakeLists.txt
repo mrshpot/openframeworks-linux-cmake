@@ -107,7 +107,7 @@ target_include_directories(openFrameworks PUBLIC
   )
 
 target_include_directories(openFrameworks PUBLIC
-  ${OF_DIR}/libs/fmodex/include
+  # ${OF_DIR}/libs/fmodex/include
   ${OF_DIR}/libs/glm/include
   ${OF_DIR}/libs/glm/include/glm
   ${OF_DIR}/libs/glm/include/glm/simd
@@ -156,11 +156,11 @@ target_compile_options(openFrameworks PUBLIC
   )
 
 target_link_directories(openFrameworks INTERFACE
-  ${OF_DIR}/libs/fmodex/lib/linux64/
+  # ${OF_DIR}/libs/fmodex/lib/linux64/
   )
 
 target_link_libraries(openFrameworks INTERFACE
-  fmodex
+  # fmodex
   ${OF_DIR}/libs/kiss/lib/linux64/libkiss.a
   ${OF_DIR}/libs/tess2/lib/linux64/libtess2.a
   gstapp-1.0
@@ -219,15 +219,19 @@ target_link_options(openFrameworks INTERFACE
   -fuse-ld=gold
   )
 
+set_property(TARGET openFrameworks PROPERTY CXX_STANDARD 11)
+
 ############################################################
 
-add_executable(helloWorld
+add_executable(${CMAKE_PROJECT_NAME}
   ${CMAKE_CURRENT_SOURCE_DIR}/src/ofApp.cpp
   ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
   )
 
-target_link_libraries(helloWorld PRIVATE openFrameworks)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE openFrameworks)
 
 # target_precompile_headers(helloWorld
 #   PRIVATE <ofMain.h>
 #   )
+
+set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 11)
